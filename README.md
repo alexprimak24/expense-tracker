@@ -18,3 +18,5 @@ Going to be some awesome expense tracker app with beautiful charts, will be done
   * Total spent this month
   * Highest spending category
   * Average daily spending
+
+![image](https://github.com/user-attachments/assets/0571c280-0c7d-4d15-a5b6-f3c8b6912809)
