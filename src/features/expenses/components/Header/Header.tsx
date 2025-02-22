@@ -14,7 +14,7 @@ const HeaderStyle = {
   header: {
     display: 'flex',
     alignItems: 'center',
-    gap: '10px',
+    gap: '15px',
     fontSize: '18px',
   } as React.CSSProperties,
   img: {
