@@ -1,7 +1,7 @@
 import React from 'react';
 
 function AddEntry() {
-  return <div></div>;
+  return <button>Add Entry</button>;
 }
 
 export default AddEntry;
