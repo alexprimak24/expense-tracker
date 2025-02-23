@@ -1,6 +1,8 @@
 import React from 'react';
 
 function SummarySection() {
+  //highest spent category make it harder
+  //and highest will be counted not on entries but on the amount of each category
   return (
     <section style={SummarySectionStyle.section} className="section outline">
       <div className="">
