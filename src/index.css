@@ -74,3 +74,8 @@ body {
 .button--entry--spaced {
   margin-left: 5px;
 }
+
+.section {
+  margin: 20px 0;
+  min-width: 80%;
+}

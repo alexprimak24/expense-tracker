@@ -3,6 +3,7 @@ import Header from './features/expenses/components/Header/Header';
 import ExpensesHistory from './features/expenses/components/ExpensesHistory/ExpensesHistory';
 import { Entry } from './types';
 import { useLocalStorageState } from './features/expenses/hooks';
+import SummarySection from './features/expenses/components/SummarySection/SummarySection';
 
 function App() {
   const [expenses, setExpenses] = useLocalStorageState<Entry[]>(
@@ -30,6 +31,7 @@ function App() {
   return (
     <div className="App">
       <Header />
+      <SummarySection />
       <ExpensesHistory
         onUpdateExpense={handleUpdateExpense}
         expenseHistory={expenses}

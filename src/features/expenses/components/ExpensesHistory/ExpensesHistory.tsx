@@ -25,7 +25,7 @@ function ExpensesHistory({
   }
 
   return (
-    <section style={ExpensesHistoryStyle.section} className="outline">
+    <section className="section outline">
       <div style={ExpensesHistoryStyle.entries}>
         {expenseHistory.length > 0 ? (
           expenseHistory.map((expense) => (
@@ -64,10 +64,6 @@ function ExpensesHistory({
 }
 
 const ExpensesHistoryStyle = {
-  section: {
-    margin: '20px 0',
-    minWidth: '80%',
-  },
   entries: {
     display: 'flex',
     alignItems: 'center',
