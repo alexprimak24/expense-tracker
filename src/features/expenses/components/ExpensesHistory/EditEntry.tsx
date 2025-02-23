@@ -19,7 +19,7 @@ function EditEntry({ expense, onUpdateExpense }: ExitEntryProps) {
       onFormSubmit={handleUpdateExpense}
       expenseEntry={expenseEntry}
       setExpenseEntry={setExpenseEntry}
-      formVariant={FORM_VARIANT.ADD}
+      formVariant={FORM_VARIANT.EDIT}
     />
   );
 }

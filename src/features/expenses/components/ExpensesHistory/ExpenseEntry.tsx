@@ -18,6 +18,11 @@ function HistoryEntry({
   const { category, amount, date, currency, comment } = expense;
   const [isEditOpen, setIsEditOpen] = useState(false);
 
+  function onUpdateExpenseAndClose(expense: Entry) {
+    onUpdateExpense(expense);
+    setIsEditOpen(false);
+  }
+
   return (
     <>
       <div style={HistoryEntryStyle.entry}>
@@ -38,7 +43,10 @@ function HistoryEntry({
         </button>
       </div>
       {isEditOpen && (
-        <EditEntry expense={expense} onUpdateExpense={onUpdateExpense} />
+        <EditEntry
+          expense={expense}
+          onUpdateExpense={onUpdateExpenseAndClose}
+        />
       )}
     </>
   );

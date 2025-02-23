@@ -96,7 +96,7 @@ function ExpenseForm({
           })
         }
       />
-      <button className="button">Add Expense</button>
+      <button className="button">{VARIANT} Expense</button>
     </form>
   );
 }
