@@ -1,7 +1,7 @@
 import React from 'react';
 
-function SpentByCategories() {
+function SpentByCATEGORIES() {
   return <div></div>;
 }
 
-export default SpentByCategories;
+export default SpentByCATEGORIES;

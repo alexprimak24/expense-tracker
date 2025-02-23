@@ -1,21 +1,57 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ExpenseEntry from './ExpenseEntry';
-import { Entry } from '../../../../types';
+import {
+  AddExpenseCallback,
+  Entry,
+  RemoveExpenseCallback,
+} from '../../../../types';
+import AddEntry from './AddEntry';
 
 interface ExpensesHistoryProps {
   expenseHistory: Entry[];
+  onAddExpense: AddExpenseCallback;
+  onRemoveExpense: RemoveExpenseCallback;
 }
 
-function ExpensesHistory({ expenseHistory }: ExpensesHistoryProps) {
+function ExpensesHistory({
+  expenseHistory,
+  onAddExpense,
+  onRemoveExpense,
+}: ExpensesHistoryProps) {
+  const [isAddExpenseFormOpen, setIsAddExpenseFormOpen] = useState(true);
+
+  //Just the same func as from props but also closes form
+  function onAddExpenseSubmit(expense: Entry) {
+    onAddExpense(expense);
+    setIsAddExpenseFormOpen(false);
+  }
+
   return (
     <section style={ExpensesHistoryStyle.section} className="outline">
       <div style={ExpensesHistoryStyle.entries}>
-        {expenseHistory.map((expense) => (
-          <ExpenseEntry key={expense.id} expense={expense} />
-        ))}
+        {expenseHistory.length > 0 ? (
+          expenseHistory.map((expense) => (
+            <ExpenseEntry
+              key={expense.id}
+              expense={expense}
+              onRemoveExpense={onRemoveExpense}
+            />
+          ))
+        ) : (
+          <h2>Add Your Entires here</h2>
+        )}
       </div>
       <div style={ExpensesHistoryStyle.action}>
-        <button className="button">Add entry btn</button>
+        {isAddExpenseFormOpen ? (
+          <AddEntry onAddExpense={onAddExpenseSubmit} />
+        ) : (
+          <button
+            className="button"
+            onClick={() => setIsAddExpenseFormOpen(true)}
+          >
+            Add Expense
+          </button>
+        )}
         <div style={ExpensesHistoryStyle.pagination}>
           <button className="button button--pagination">←</button>
           <button className="button button--pagination">→</button>

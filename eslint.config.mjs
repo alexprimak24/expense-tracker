@@ -38,7 +38,7 @@ export default [
       quotes: ['warn', 'single', { avoidEscape: true }],
       'jsx-quotes': ['warn', 'prefer-double'],
       'object-curly-spacing': ['warn', 'always'],
-      'comma-dangle': ['error', 'always-multiline'],
+      // 'comma-dangle': ['error', 'always-multiline'],
       indent: ['error', 2, { SwitchCase: 1 }],
       'arrow-parens': ['warn', 'always'],
       'linebreak-style': ['error', 'unix'],

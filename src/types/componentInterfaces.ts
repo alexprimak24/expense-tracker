@@ -1,5 +1,11 @@
 /* eslint-disable no-unused-vars */
-export enum Categories {
+export enum CURRENCIES {
+  EUR = '€',
+  USD = '$',
+  UA = '₴',
+}
+
+export enum CATEGORIES {
   Food = 'Food',
   Shopping = 'Shopping',
   Transport = 'Transport',
@@ -10,10 +16,13 @@ export enum Categories {
 }
 
 export interface Entry {
-  id: number;
+  id: string;
   amount: number;
-  category: Categories;
-  currency: string;
-  date: Date;
+  category: CATEGORIES;
+  currency: CURRENCIES;
+  date: number;
   comment?: string;
 }
+
+export type AddExpenseCallback = (expense: Entry) => void;
+export type RemoveExpenseCallback = (expenseToRemove: Entry) => void;
