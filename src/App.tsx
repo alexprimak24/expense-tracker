@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Header from './features/expenses/components/Header/Header';
 import ExpensesHistory from './features/expenses/components/ExpensesHistory/ExpensesHistory';
 import { Entry, Categories } from './types';
@@ -47,10 +47,11 @@ const mockExpense: Entry[] = [
 ];
 
 function App() {
+  const [entry, setEntry] = useState(mockExpense);
   return (
     <div className="App">
       <Header />
-      <ExpensesHistory expenseHistory={mockExpense} />
+      <ExpensesHistory expenseHistory={entry} />
     </div>
   );
 }

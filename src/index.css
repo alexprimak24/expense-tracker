@@ -45,3 +45,32 @@ body {
   padding: 10px;
   border-radius: 16px;
 }
+
+.button {
+  height: 40px;
+  width: 12rem;
+  padding: '10px 10px';
+  background: #0e0e1e;
+  color: #ffffff;
+  border: 1px solid rgba(128, 128, 128, 0.411);
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.button:hover {
+  background: #141430;
+}
+.button--pagination {
+  height: 40px;
+  width: 5rem;
+}
+
+.button--entry {
+  width: 40px;
+  height: 40px;
+  border-radius: 100%;
+}
+
+.button--entry--spaced {
+  margin-left: 5px;
+}

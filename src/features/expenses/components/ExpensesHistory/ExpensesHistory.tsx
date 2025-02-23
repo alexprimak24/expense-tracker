@@ -15,10 +15,10 @@ function ExpensesHistory({ expenseHistory }: ExpensesHistoryProps) {
         ))}
       </div>
       <div style={ExpensesHistoryStyle.action}>
-        <button>Add entry btn</button>
+        <button className="button">Add entry btn</button>
         <div style={ExpensesHistoryStyle.pagination}>
-          <button>←</button>
-          <button>→</button>
+          <button className="button button--pagination">←</button>
+          <button className="button button--pagination">→</button>
         </div>
       </div>
     </section>

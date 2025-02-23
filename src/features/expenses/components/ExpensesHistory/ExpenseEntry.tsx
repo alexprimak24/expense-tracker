@@ -29,8 +29,8 @@ const CategoryIcons: Record<Categories, ReactNode> = {
 //MAYBE USE SOME HOOK FOR CONVERTING DATE FROM NUMBER TO THE HUMAN READABLE FORM
 // OR
 // dhm HOOK CHANGE TO THE WAY IT WOULD BE EASIER TO USE WITH THE USER INPUT
-function dhm(date: string) {
-  const ms = Date.now() - Date.parse(date);
+function dhm(date: number) {
+  const ms = Date.now() - date;
 
   const days = Math.floor(ms / (24 * 60 * 60 * 1000));
   const daysms = ms % (24 * 60 * 60 * 1000);
@@ -43,10 +43,10 @@ function dhm(date: string) {
   const returnedMinutes = minutes < 1 ? '' : minutes + 'm';
 
   const ago = ' ago';
-
-  if (days < 1) return returnedHours + ' ' + returnedMinutes + ago;
-  else if (days > 1) return returnedDays + ago;
-  else if (hours < 1) return returnedMinutes + ago;
+  if (days < 1 && hours < 1 && minutes < 1) return 'just now';
+  else if (days < 1) return returnedHours + ' ' + returnedMinutes + ago;
+  else if (days >= 1) return returnedDays + ago;
+  else if (hours <= 1 && minutes > 1) return returnedMinutes + ago;
 }
 
 function HistoryEntry({ expense }: ExpensesEntryProps) {
@@ -56,39 +56,18 @@ function HistoryEntry({ expense }: ExpensesEntryProps) {
     <div style={HistoryEntryStyle.entry}>
       <span>{CategoryIcons[category]}</span>
       <div>{amount + ' ' + currency}</div>
-      <div>{dhm(date.toString())}</div>
-      <button>✏️</button>
-      <button>❌</button>
+      <div>{dhm(Date.parse(date.toString()))}</div>
+      <button className="button button--entry">✏️</button>
+      <button className="button button--entry button--entry--spaced">❌</button>
     </div>
   );
 }
 
 const HistoryEntryStyle = {
   entry: {
-    display: 'flex',
-    alignItems: 'center',
+    display: 'grid',
+    gridTemplateColumns: '20px 1fr 1fr 40px 40px',
     minWidth: '100%',
-    // gap: '10px',
-    justifyContent: 'space-between',
-  },
-  entries: {
-    display: 'flex',
-    alignItems: 'center',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    minWidth: '100%',
-    margin: 'auto',
-    gap: '15px',
-    padding: '20px 10px',
-  } as React.CSSProperties,
-  action: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    padding: '10px 20px',
-  } as React.CSSProperties,
-  pagination: {
-    display: 'flex',
-    gap: '10px',
   } as React.CSSProperties,
 };
 
