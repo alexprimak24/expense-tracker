@@ -24,5 +24,4 @@ export interface Entry {
   comment?: string;
 }
 
-export type AddExpenseCallback = (expense: Entry) => void;
-export type RemoveExpenseCallback = (expenseToRemove: Entry) => void;
+export type ExpenseCallback = (expense: Entry) => void;

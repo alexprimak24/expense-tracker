@@ -1,22 +1,20 @@
 import React, { useState } from 'react';
 import ExpenseEntry from './ExpenseEntry';
-import {
-  AddExpenseCallback,
-  Entry,
-  RemoveExpenseCallback,
-} from '../../../../types';
+import { ExpenseCallback, Entry } from '../../../../types';
 import AddEntry from './AddEntry';
 
 interface ExpensesHistoryProps {
   expenseHistory: Entry[];
-  onAddExpense: AddExpenseCallback;
-  onRemoveExpense: RemoveExpenseCallback;
+  onAddExpense: ExpenseCallback;
+  onRemoveExpense: ExpenseCallback;
+  onUpdateExpense: ExpenseCallback;
 }
 
 function ExpensesHistory({
   expenseHistory,
   onAddExpense,
   onRemoveExpense,
+  onUpdateExpense,
 }: ExpensesHistoryProps) {
   const [isAddExpenseFormOpen, setIsAddExpenseFormOpen] = useState(true);
 
@@ -35,6 +33,7 @@ function ExpensesHistory({
               key={expense.id}
               expense={expense}
               onRemoveExpense={onRemoveExpense}
+              onUpdateExpense={onUpdateExpense}
             />
           ))
         ) : (

@@ -1,37 +1,46 @@
-import React from 'react';
-import { Entry, RemoveExpenseCallback } from '../../../../types';
+import React, { useState } from 'react';
+import { Entry, ExpenseCallback } from '../../../../types';
 import { dhm } from '../../../../utils/helpers';
 import { CategoryIcons } from '../../../../assets';
+import EditEntry from './EditEntry';
 
 interface ExpensesEntryProps {
   expense: Entry;
-  onRemoveExpense: RemoveExpenseCallback;
+  onRemoveExpense: ExpenseCallback;
+  onUpdateExpense: ExpenseCallback;
 }
 
-//TODO
-// SEND IT TO HELPERS FUNCTIONS
-
-//THIS HOW BY ADDING ENTRY HANDLE DATE
-//MAYBE USE SOME HOOK FOR CONVERTING DATE FROM NUMBER TO THE HUMAN READABLE FORM
-// OR
-// dhm HOOK CHANGE TO THE WAY IT WOULD BE EASIER TO USE WITH THE USER INPUT
-
-function HistoryEntry({ expense, onRemoveExpense }: ExpensesEntryProps) {
+function HistoryEntry({
+  expense,
+  onRemoveExpense,
+  onUpdateExpense,
+}: ExpensesEntryProps) {
   const { category, amount, date, currency, comment } = expense;
+  const [isEditOpen, setIsEditOpen] = useState(false);
 
   return (
-    <div style={HistoryEntryStyle.entry}>
-      <span>{CategoryIcons[category]}</span>
-      <div>{amount + ' ' + currency}</div>
-      <div>{dhm(date)}</div>
-      <button className="button button--entry">✏️</button>
-      <button
-        className="button button--entry button--entry--spaced"
-        onClick={() => onRemoveExpense(expense)}
-      >
-        ❌
-      </button>
-    </div>
+    <>
+      <div style={HistoryEntryStyle.entry}>
+        <span>{CategoryIcons[category]}</span>
+        <div>{amount + ' ' + currency}</div>
+        <div>{dhm(date)}</div>
+        <button
+          className="button button--entry"
+          onClick={() => setIsEditOpen((prev) => !prev)}
+        >
+          ✏️
+        </button>
+        <button
+          className="button button--entry button--entry--spaced"
+          onClick={() => onRemoveExpense(expense)}
+        >
+          ❌
+        </button>
+      </div>
+      {isEditOpen && (
+        <EditEntry expense={expense} onUpdateExpense={onUpdateExpense} />
+      )}
+    </>
   );
 }
 

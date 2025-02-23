@@ -18,10 +18,18 @@ function App() {
     const newArray = expenses.filter((expense) => expense !== expenseToRemove);
     setExpense(newArray);
   }
+
+  function handleUpdateExpense(expenseToUpdate: Entry) {
+    const newArray = expenses.filter(
+      (expense) => expense.id !== expenseToUpdate.id,
+    );
+    setExpense([...newArray, expenseToUpdate]);
+  }
   return (
     <div className="App">
       <Header />
       <ExpensesHistory
+        onUpdateExpense={handleUpdateExpense}
         expenseHistory={expenses}
         onAddExpense={handleAddExpense}
         onRemoveExpense={handleRemoveExpense}
