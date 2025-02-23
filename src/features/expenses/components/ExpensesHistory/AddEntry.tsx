@@ -9,9 +9,10 @@ import ExpenseForm, { FORM_VARIANT } from '../../../../components/ExpenseForm';
 
 interface AddEntryProps {
   onAddExpense: ExpenseCallback;
+  setIsFormOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-function AddEntry({ onAddExpense }: AddEntryProps) {
+function AddEntry({ onAddExpense, setIsFormOpen }: AddEntryProps) {
   const [expenseEntry, setExpenseEntry] = useState<Entry>({
     id: crypto.randomUUID(),
     amount: 100,
@@ -33,12 +34,17 @@ function AddEntry({ onAddExpense }: AddEntryProps) {
   console.log(expenseEntry);
   return (
     <>
-      <ExpenseForm
-        onFormSubmit={handleAddExpense}
-        expenseEntry={expenseEntry}
-        setExpenseEntry={setExpenseEntry}
-        formVariant={FORM_VARIANT.ADD}
-      />
+      <div>
+        <ExpenseForm
+          onFormSubmit={handleAddExpense}
+          expenseEntry={expenseEntry}
+          setExpenseEntry={setExpenseEntry}
+          formVariant={FORM_VARIANT.ADD}
+        />
+        <button className="button" onClick={() => setIsFormOpen(false)}>
+          Back
+        </button>
+      </div>
     </>
   );
 }

@@ -42,7 +42,10 @@ function ExpensesHistory({
       </div>
       <div style={ExpensesHistoryStyle.action}>
         {isAddExpenseFormOpen ? (
-          <AddEntry onAddExpense={onAddExpenseSubmit} />
+          <AddEntry
+            onAddExpense={onAddExpenseSubmit}
+            setIsFormOpen={setIsAddExpenseFormOpen}
+          />
         ) : (
           <button
             className="button"

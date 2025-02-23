@@ -1,29 +1,31 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Header from './features/expenses/components/Header/Header';
 import ExpensesHistory from './features/expenses/components/ExpensesHistory/ExpensesHistory';
 import { Entry } from './types';
 import { useLocalStorageState } from './features/expenses/hooks';
 
 function App() {
-  const [expenses, setExpense] = useLocalStorageState<Entry[]>(
+  const [expenses, setExpenses] = useLocalStorageState<Entry[]>(
     [],
     'expensesEntries',
   );
 
   function handleAddExpense(expense: Entry) {
-    setExpense((pexp) => [...pexp, expense]);
+    setExpenses((pexp) => [...pexp, expense]);
   }
 
   function handleRemoveExpense(expenseToRemove: Entry) {
-    const newArray = expenses.filter((expense) => expense !== expenseToRemove);
-    setExpense(newArray);
+    const newArray = expenses.filter(
+      (expense) => expense.id !== expenseToRemove.id,
+    );
+    setExpenses(newArray);
   }
 
   function handleUpdateExpense(expenseToUpdate: Entry) {
-    const newArray = expenses.filter(
-      (expense) => expense.id !== expenseToUpdate.id,
+    const newArray = expenses.map((expense) =>
+      expense.id === expenseToUpdate.id ? expenseToUpdate : expense,
     );
-    setExpense([...newArray, expenseToUpdate]);
+    setExpenses(newArray);
   }
   return (
     <div className="App">
