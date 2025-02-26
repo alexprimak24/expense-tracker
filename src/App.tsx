@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import Header from './features/expenses/components/Header/Header';
 import ExpensesHistory from './features/expenses/components/ExpensesHistory/ExpensesHistory';
-import { CATEGORIES, Entry } from './types';
+import { Entry } from './types';
 import { useLocalStorageState } from './features/expenses/hooks';
 import SummarySection from './features/expenses/components/SummarySection/SummarySection';
 
@@ -10,6 +10,13 @@ function App() {
     [],
     'expensesEntries',
   );
+
+  const sortedExpenses = useMemo(() => {
+    //don't use it as it mutates array
+    // return expenses.sort((a, b) => b.date - a.date);
+    //just reminder: spread created a shallow copy of an array
+    return [...expenses].sort((a, b) => b.date - a.date);
+  }, [expenses]);
 
   function handleAddExpense(expense: Entry) {
     setExpenses((pexp) => [...pexp, expense]);
@@ -34,7 +41,7 @@ function App() {
       <SummarySection expenses={expenses} />
       <ExpensesHistory
         onUpdateExpense={handleUpdateExpense}
-        expenseHistory={expenses}
+        expenseHistory={sortedExpenses}
         onAddExpense={handleAddExpense}
         onRemoveExpense={handleRemoveExpense}
       />

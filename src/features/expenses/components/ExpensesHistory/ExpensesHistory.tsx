@@ -9,6 +9,7 @@ interface ExpensesHistoryProps {
   onRemoveExpense: ExpenseCallback;
   onUpdateExpense: ExpenseCallback;
 }
+const ITEMS_PER_PAGE = 5;
 
 function ExpensesHistory({
   expenseHistory,
@@ -16,8 +17,26 @@ function ExpensesHistory({
   onRemoveExpense,
   onUpdateExpense,
 }: ExpensesHistoryProps) {
+  //Related to form
   const [isAddExpenseFormOpen, setIsAddExpenseFormOpen] = useState(true);
+  //Related to pagination
+  const [currentPage, setCurrentPage] = useState(1);
 
+  const totalExpenses = expenseHistory.length;
+
+  //7.002 rounds to 8 - as we want to show another page even if only 1 entry presented
+  const totalPages = Math.ceil(totalExpenses / ITEMS_PER_PAGE);
+
+  const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+  const currentExpenses = expenseHistory.slice(
+    startIndex,
+    startIndex + ITEMS_PER_PAGE,
+  );
+
+  function goToPage(page: number) {
+    if (page < 1 || page > totalExpenses) return;
+    setCurrentPage(page);
+  }
   //Just the same func as from props but also closes form
   function onAddExpenseSubmit(expense: Entry) {
     onAddExpense(expense);
@@ -27,8 +46,8 @@ function ExpensesHistory({
   return (
     <section className="section outline">
       <div style={ExpensesHistoryStyle.entries}>
-        {expenseHistory.length > 0 ? (
-          expenseHistory.map((expense) => (
+        {currentExpenses.length > 0 ? (
+          currentExpenses.map((expense) => (
             <ExpenseEntry
               key={expense.id}
               expense={expense}
@@ -55,8 +74,20 @@ function ExpensesHistory({
           </button>
         )}
         <div style={ExpensesHistoryStyle.pagination}>
-          <button className="button button--pagination">←</button>
-          <button className="button button--pagination">→</button>
+          <button
+            className="button button--pagination"
+            disabled={currentPage == 1}
+            onClick={() => goToPage(currentPage - 1)}
+          >
+            ←
+          </button>
+          <button
+            className="button button--pagination"
+            disabled={currentPage == totalPages}
+            onClick={() => goToPage(currentPage + 1)}
+          >
+            →
+          </button>
         </div>
       </div>
     </section>
