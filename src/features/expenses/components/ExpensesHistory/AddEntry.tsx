@@ -31,7 +31,6 @@ function AddEntry({ onAddExpense, setIsFormOpen }: AddEntryProps) {
     assignDate();
     onAddExpense(expenseEntry);
   }
-  console.log(expenseEntry);
   return (
     <>
       <div>
