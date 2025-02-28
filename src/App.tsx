@@ -4,6 +4,8 @@ import ExpensesHistory from './features/expenses/components/ExpensesHistory/Expe
 import { Entry } from './types';
 import { useLocalStorageState } from './features/expenses/hooks';
 import SummarySection from './features/expenses/components/SummarySection/SummarySection';
+import SpentByCategoriesChart from './features/expenses/components/SpentByCategoriesChart/SpentByCategoriesChart';
+import { sortCategoriesByAmount } from './utils/helpers';
 
 function App() {
   const [expenses, setExpenses] = useLocalStorageState<Entry[]>(
@@ -35,6 +37,7 @@ function App() {
     );
     setExpenses(newArray);
   }
+  console.log(sortCategoriesByAmount(expenses));
   return (
     <div className="App">
       <Header />
@@ -44,6 +47,9 @@ function App() {
         expenseHistory={sortedExpenses}
         onAddExpense={handleAddExpense}
         onRemoveExpense={handleRemoveExpense}
+      />
+      <SpentByCategoriesChart
+        sortedCategories={sortCategoriesByAmount(expenses)}
       />
     </div>
   );

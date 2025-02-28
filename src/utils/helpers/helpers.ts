@@ -67,29 +67,25 @@ export function highestSpentCategory(
 }
 
 // This is mine version that is not perfect but working
-// export function highestSpentCategory(expenses: Entry[]) {
-//   if (expenses.length === 0) return null;
-//   const categoriesExpenses = {
-//     [CATEGORIES.Food]: 0,
-//     [CATEGORIES.Shopping]: 0,
-//     [CATEGORIES.Transport]: 0,
-//     [CATEGORIES.Housing]: 0,
-//     [CATEGORIES.Entertainment]: 0,
-//     [CATEGORIES.OnlineServices]: 0,
-//     [CATEGORIES.Others]: 0,
-//   };
-//   expenses.forEach((expense: Entry) => {
-//     categoriesExpenses[expense.category] =
-//       categoriesExpenses[expense.category] + expense.amount;
-//   });
-//   //Object.entries converted an object to an array or arrays with key value pairs
-//   //[[Food,0],[Shopping,100]] <- like that
-//   const highestCategory = Object.entries(categoriesExpenses).sort(
-//     (category, amount) => {
-//       //it will return the result into descending order
-//       // category[1] - amount[1]; - ascending order
-//       return amount[1] - category[1];
-//     },
-//   )[0];
-//   return highestCategory;
-// }
+export function sortCategoriesByAmount(expenses: Entry[]) {
+  if (expenses.length === 0) return null;
+  const categoriesExpenses = {
+    [CATEGORIES.Food]: 0,
+    [CATEGORIES.Shopping]: 0,
+    [CATEGORIES.Transport]: 0,
+    [CATEGORIES.Housing]: 0,
+    [CATEGORIES.Entertainment]: 0,
+    [CATEGORIES.OnlineServices]: 0,
+    [CATEGORIES.Others]: 0,
+  };
+  expenses.forEach((expense: Entry) => {
+    categoriesExpenses[expense.category] =
+      categoriesExpenses[expense.category] + expense.amount;
+  });
+  //Object.entries converted an object to an array or arrays with key value pairs
+  //[[Food,0],[Shopping,100]] <- like that
+  const highestCategory = Object.entries(categoriesExpenses)
+    .sort((category, amount) => amount[1] - category[1])
+    .map(([name, value]) => ({ name, value }));
+  return highestCategory;
+}
