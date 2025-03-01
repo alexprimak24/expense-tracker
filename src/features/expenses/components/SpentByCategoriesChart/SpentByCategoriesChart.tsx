@@ -1,5 +1,6 @@
 import React from 'react';
-import { PieChart, Pie, Cell } from 'recharts';
+import { PieChart, Pie, Cell, Tooltip } from 'recharts';
+import CustomTooltip from './CustomTooltip';
 
 interface SpentByCategoriesChartProps {
   sortedCategories: categoriesObj[] | null;
@@ -58,24 +59,34 @@ const renderCustomizedLabel = ({
 function SpentByCategoriesChart({
   sortedCategories,
 }: SpentByCategoriesChartProps) {
-  if (sortedCategories === null) return <></>;
+  if (sortedCategories === null)
+    return (
+      <>
+        <h1>Spent by categories:</h1>{' '}
+        <h4>Oops, seems like there is no expenses yet</h4>
+      </>
+    );
   return (
-    <PieChart width={400} height={400}>
-      <Pie
-        data={sortedCategories}
-        cx={200}
-        cy={200}
-        labelLine={false}
-        label={renderCustomizedLabel}
-        outerRadius={80}
-        fill="#8884d8"
-        dataKey="value"
-      >
-        {sortedCategories.map((entry, index) => (
-          <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-        ))}
-      </Pie>
-    </PieChart>
+    <>
+      <h1>Spent by categories:</h1>
+      <PieChart width={800} height={800}>
+        <Pie
+          data={sortedCategories}
+          cx="50%"
+          cy="50%"
+          labelLine={false}
+          label={renderCustomizedLabel}
+          // outerRadius={80}
+          fill="#8884d8"
+          dataKey="value"
+        >
+          {sortedCategories.map((entry, index) => (
+            <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+          ))}
+        </Pie>
+        <Tooltip content={<CustomTooltip />} />
+      </PieChart>
+    </>
   );
 }
 

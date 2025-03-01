@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Entry, ExpenseCallback } from '../../../../types';
-import { dhm } from '../../../../utils/helpers';
 import { CategoryIcons } from '../../../../assets';
 import EditEntry from './EditEntry';
+import { dhm } from '../../../../utils/helpers';
 
 interface ExpensesEntryProps {
   expense: Entry;

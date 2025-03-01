@@ -6,6 +6,7 @@ import { useLocalStorageState } from './features/expenses/hooks';
 import SummarySection from './features/expenses/components/SummarySection/SummarySection';
 import SpentByCategoriesChart from './features/expenses/components/SpentByCategoriesChart/SpentByCategoriesChart';
 import { sortCategoriesByAmount } from './utils/helpers';
+import SpentOverTimeChart from './features/expenses/components/SpentOverTimeChart/SpentOverTimeChart';
 
 function App() {
   const [expenses, setExpenses] = useLocalStorageState<Entry[]>(
@@ -37,7 +38,7 @@ function App() {
     );
     setExpenses(newArray);
   }
-  console.log(sortCategoriesByAmount(expenses));
+
   return (
     <div className="App">
       <Header />
@@ -51,6 +52,7 @@ function App() {
       <SpentByCategoriesChart
         sortedCategories={sortCategoriesByAmount(expenses)}
       />
+      <SpentOverTimeChart expenses={expenses} />
     </div>
   );
 }
