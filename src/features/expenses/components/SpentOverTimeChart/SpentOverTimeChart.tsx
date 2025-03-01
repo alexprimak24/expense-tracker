@@ -20,6 +20,15 @@ function SpentOverTimeChart({ expenses }: SpentOverTimeChartProps) {
     date: dhm(expense.date)?.trim(),
   }));
 
+  if (formattedExpenses.length === 0) {
+    return (
+      <>
+        <h1>Expenses over time:</h1>
+        <h4>Oops, seems like there is no expenses yet</h4>
+      </>
+    );
+  }
+
   return (
     <>
       <h1>Expenses over time:</h1>

@@ -60,6 +60,7 @@ const renderCustomizedLabel = ({
 function SpentByCategoriesChart({
   sortedCategories,
 }: SpentByCategoriesChartProps) {
+  console.log(sortedCategories);
   if (sortedCategories === null)
     return (
       <>
