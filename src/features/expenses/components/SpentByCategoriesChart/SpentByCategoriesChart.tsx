@@ -1,6 +1,7 @@
 import React from 'react';
 import { PieChart, Pie, Cell, Tooltip } from 'recharts';
-import CustomTooltip from './CustomTooltip';
+import styles from './SpentByCategoriesChart.module.css';
+import AddEntry from '../ExpensesHistory/AddEntry';
 
 interface SpentByCategoriesChartProps {
   sortedCategories: categoriesObj[] | null;
@@ -84,7 +85,7 @@ function SpentByCategoriesChart({
             <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
           ))}
         </Pie>
-        <Tooltip content={<CustomTooltip />} />
+        <Tooltip />
       </PieChart>
     </>
   );
