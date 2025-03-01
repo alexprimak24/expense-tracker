@@ -86,6 +86,9 @@ export function sortCategoriesByAmount(expenses: Entry[]) {
   //[[Food,0],[Shopping,100]] <- like that
   const highestCategory = Object.entries(categoriesExpenses)
     .sort((category, amount) => amount[1] - category[1])
-    .map(([name, value]) => ({ name, value }));
+    .map(([name, value]) => ({ name, value }))
+    .filter((entry) => entry.value > 0);
+
+  console.log(highestCategory);
   return highestCategory;
 }
